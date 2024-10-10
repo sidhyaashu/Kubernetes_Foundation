@@ -301,3 +301,9 @@ server       LoadBalancer   10.104.50.214   <pending>     3000:30139/TCP   8s
 
 ```bash
 minikube service <NAME>
+```
+
+- Delete deployment
+```bash
+kubectl delete -f deployment-server.yml
+```
