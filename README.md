@@ -29,7 +29,7 @@ Kubernetes (often abbreviated as K8s) is an open-source container orchestration 
     - **Pods**: The smallest and most basic unit in Kubernetes, which can contain one or more containers that share the same network and storage.
     - **Services**: Abstracts and defines a stable network endpoint for a set of pods to facilitate load balancing and service discovery.
     - **Deployments**: Allows you to define the desired state for your application and automates the process of deploying and updating containers.
-    - **ConfigMaps and Secrets: Store configuration data and sensitive information (like passwords or API keys) in a secure and manageable way.
+    - **ConfigMaps and Secrets**: Store configuration data and sensitive information (like passwords or API keys) in a secure and manageable way.
     - **Namespaces**: Provide logical isolation within a cluster to divide resources among multiple users or teams.
     - **Ingress**: Manages external access to services within the cluster, typically HTTP and HTTPS, and provides load balancing, SSL termination, and more.
 
@@ -41,10 +41,10 @@ Kubernetes (often abbreviated as K8s) is an open-source container orchestration 
 
 5. # Kubernetes Ecosystem:
 There are numerous tools in the Kubernetes ecosystem, including:
-    - **Helm**: Package manager for Kubernetes to define, install, and manage Kubernetes applications.
-    - **Prometheus**: Monitoring and alerting tool, often used with Kubernetes.
-    - **Istio**: Service mesh that provides traffic management, security, and observability for microservices.
-    - **Kustomize**: Tool for customizing Kubernetes configurations.
+ - **Helm**: Package manager for Kubernetes to define, install, and manage Kubernetes applications.
+ - **Prometheus**: Monitoring and alerting tool, often used with Kubernetes.
+ - **Istio**: Service mesh that provides traffic management, security, and observability for microservices.
+ - **Kustomize**: Tool for customizing Kubernetes configurations.
 
 Kubernetes has become the de facto standard for container orchestration, offering scalability, resiliency, and flexibility for modern cloud-native applications. It is widely adopted by enterprises for managing complex distributed systems.
 
