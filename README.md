@@ -23,7 +23,14 @@ Kubernetes (often abbreviated as K8s) is an open-source container orchestration 
     - **Cluster**: The basic unit of Kubernetes, consisting of a master node (control plane) and multiple worker nodes where the containers run.
     - **Nodes**: Machines (either physical or virtual) that run the containerized applications.
     - **Master Node**: Manages the cluster and is responsible for scheduling containers, monitoring the cluster state, and managing changes.
+        - 1. API SERVER - assign node to newly create pods
+        - 2. SCHEDULAR - key value store
+        - 3. ETCD
+        - 4. CONTROL MANAGER
     - **Worker Node**: Runs the containers and reports back to the master.
+        - 1. KUBELET - Agent , make sure containers running in pods
+        - 2. KUBE PROXY - maintain network rules for communication with pods
+        - 3. CONTAINER RUNTIME - resposible for running containers(Docker)
 
 3. # Main Components:
     - **Pods**: The smallest and most basic unit in Kubernetes, which can contain one or more containers that share the same network and storage.
@@ -48,8 +55,141 @@ There are numerous tools in the Kubernetes ecosystem, including:
 
 Kubernetes has become the de facto standard for container orchestration, offering scalability, resiliency, and flexibility for modern cloud-native applications. It is widely adopted by enterprises for managing complex distributed systems.
 
+# Before start install:
+- 1. Kubernetes
+- 2. minikube
+
+## Minikube
+Minikube is a lightweight Kubernetes implementation that allows developers to run a Kubernetes cluster locally on their personal machines. It is designed to provide a simple and convenient way to experiment with Kubernetes, develop applications, and test them in a local environment without needing to set up a full-blown Kubernetes cluster on cloud or on-premises infrastructure.
+
+# STEPS:
+To create a pod in Kubernetes using Minikube on Windows, follow these steps:
+
+- Step 1: Start Minikube
+Make sure Minikube is started by running:
+
+```bash
+minikube start
+```
+- Step 2: Create a Pod Manifest (YAML File)
+You need a YAML file that defines the pod configuration. Here's an example pod.yaml for a simple Nginx pod:
+
+```bash
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+```
+Save this file as pod.yaml.
+
+- Step 3: Apply the Pod Configuration
+Run the following command in your terminal or command prompt to create the pod:
+
+```bash
+kubectl apply -f pod.yaml
+```
+- Step 4: Verify the Pod is Running
+Check the status of the pod using:
+
+```bash
+kubectl get pods
+```
+- Step 5: View Pod Details
+For more detailed information about the pod:
+
+```bash
+kubectl describe pod nginx-pod
+```
+Make sure you have Kubernetes and Minikube installed, and the Minikube cluster is running before applying the pod configuration.
+
+# Using CMD
+```bash
+kubectl create deployment <name_app> --image=<image_name>:<tag>
+```
+- after create run:
+```bash
+kubectl get deployments
+```
+
+- To get the pods:
+```bash
+kubectl get pods
+```
+
+- To see Dashboard:
+```bash
+minikube dashboard
+```
+
+- To assign port for expose:
+```bash
+kubectl expose deployment <name_app> --port=<image_port> --type=LoadBalancer
+```
+- image_port : port of the image like nginx is 80
+- type : Different types are available
+
+- next:
+```bash
+kubectl get services
+```
+```bash
+minikube service <name_app>
+```
+- After that you will get an IP address or URL
+
+
+# UP NEXT:
+- After creating project make docker image and push to dockerhub cz Kubernetes not deals with local image
+- Check minikube status by "minikube status" command
+
+- If all running make depeloyment
+```bash
+kubectl create deployment <name_app> --image=<image_name>:<tag>
+```
+
+- After create to see depeloyment & check running or not (it's take time):
+```bash
+kubectl get deployments
+```
+
+- To see logs in your terminal:
+```bash
+kubectl logs <app_name>
+```
+- To Expose services:
+```bash
+kubectl expose deployment <name_app> --type=LoadBalancer --port=<exposedport>
+```
+- To see services:
+```bash
+kubectl get services
+```
+- To run services:
+```bash
+minikube service <app_name>
+```
+
+- Congratulations Now you can see your app
 
 
 
+## NEXT - UPDATE YOUR APP
+- Update your app
 
+1. No to set Image:
+```bash
+kubectl set image deployment <app_name> <container_name>=<dockerhub_username>/<newImage_name>:<tag>
+```
+2. see the status
+```bash
+kubectl get pods
+```
+- now you can see the old version is terminating and new is running
 
+- Congratulations Now you can see your updated app
