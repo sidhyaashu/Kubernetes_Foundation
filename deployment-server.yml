@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # Unique key of the Deployment instance
+  name: server
+spec:
+  # 3 Pods should exist at all times.
+  replicas: 2
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        # Apply this label to pods and default
+        # the Deployment label selector to this value
+        app: server
+    spec:
+      containers:
+      - name: server
+        # Run this image
+        image: sidhyaasutosh/server:v1

@@ -193,3 +193,111 @@ kubectl get pods
 - now you can see the old version is terminating and new is running
 
 - Congratulations Now you can see your updated app
+
+
+# Rollback and Rollout
+```bash
+kubectl rollout status deployment <app_name>
+```
+- Check the status and next undo the deployment if stuck
+
+```bash
+kubectl rollout undo deployment <app_name>
+```
+
+
+# delete service
+```bash
+kubectl delete service server
+```
+
+
+## Self Healing
+In Kubernetes, the self-healing factor refers to the system's ability to automatically detect and fix issues with applications running in containers. Here’s how it works in simple terms:
+
+- Monitoring: Kubernetes constantly checks the health of the containers and the nodes (the servers where the containers run).
+
+- Automatic Restarts: If a container crashes or becomes unresponsive, Kubernetes automatically restarts it without any manual intervention.
+
+- Replacing Failed Nodes: If a node goes down, Kubernetes can automatically reschedule the affected containers onto other healthy nodes.
+
+- Maintaining Desired State: You define the desired state of your application (like how many replicas of a service should run). Kubernetes ensures that this state is maintained. If any container goes down, Kubernetes will start a new one to replace it.
+
+
+# scaling
+Scaling in Kubernetes refers to adjusting the number of replicas (instances) of a particular application (like a deployment) to handle more or less traffic. Here’s a simple explanation of scaling in both Kubernetes and Minikube, along with the commands you can use:
+
+Scaling in Kubernetes
+Increase Replicas: If your application needs to handle more requests, you can increase the number of replicas. This means more instances of your application will run, distributing the load.
+
+Decrease Replicas: If you have fewer requests, you can reduce the number of replicas to save resources.
+
+**Commands for Scaling in Kubernetes**
+To scale up (increase replicas):
+
+```bash
+kubectl scale deployment <deployment-name> --replicas=<number>
+```
+For example, to set the deployment named my-app to 5 replicas:
+
+```bash
+kubectl scale deployment my-app --replicas=5
+```
+To scale down (decrease replicas): You can use the same command but specify a lower number:
+
+```bash
+kubectl scale deployment my-app --replicas=2
+```
+To see pods:
+
+```bash
+kubectl get pods
+```
+
+# Delete pods
+1. Delete pods:
+```bash
+kubectl delete pod <pod_name>
+```
+
+2. Delete all pods under a specific deployment:
+```bash
+kubectl delete deployment <deployment-name>
+```
+
+# Deployment config file
+```bash
+https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#deployment-v1-apps
+```
+- make yml file 
+
+```bash
+kubectl apply -f deployment-server.yml
+```
+- see the pods
+```bash
+kubectl get pods
+```
+
+# Service config file
+```bash
+https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.31/#service-v1-core
+```
+- make yml file 
+
+```bash
+kubectl apply -f service-server.yml
+```
+```bash
+kubectl get services
+```
+- Run service
+```plaintext
+E:\Kubernets\Kubernetes_Foundation>kubectl get services
+NAME         TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+kubernetes   ClusterIP      10.96.0.1       <none>        443/TCP          4h19m
+server       LoadBalancer   10.104.50.214   <pending>     3000:30139/TCP   8s
+```
+
+```bash
+minikube service <NAME>
